@@ -86,7 +86,7 @@ $(document).ready(function(){
             results += `<td>${country.countryname}</td>`;
             results += `<td>${country.cities}</td>`;
             results += `<td>${country.airports}</td>`;
-            results += `<td>${country.airlines}</td>`;
+            results += `<td>${country.airline}</td>`;
             results += `<td><a href='#'><i class='fas fa-edit fa-lg'></i></a></td>`;
             results += `</tr>`;
         });

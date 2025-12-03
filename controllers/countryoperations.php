@@ -13,6 +13,7 @@ try {
     if (isset($_GET['getcountry'])) {
         $response = $country->getcountry();
         echo $response;
+
     }
 
     if (isset($_GET['listcountry'])) {

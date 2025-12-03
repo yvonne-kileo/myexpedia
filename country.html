@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expedia - Manage Countries</title>
-    <link rel="stylesheet" href="css/all.css">
+    
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/all.css"> <!-- optional -->
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
         <div id="countrynotifications"></div>
+
         <table class="table table-sm table-striped table-hover" id="countrytable">
             <thead>
                 <tr>
@@ -18,13 +23,14 @@
                     <th>Cities</th>
                     <th>Airports</th>
                     <th>Airlines</th>
-                    <th></th> <!-- Editing the country -->
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
+
         <!-- Button for adding a country -->
-        <button class="btn btn-sm btn-success" id="addnewcountry">
+        <button class="btn btn-sm btn-success mb-3" id="addnewcountry">
             <i class="fas fa-plus"></i> Add New Country
         </button>
     </div>
@@ -59,8 +65,9 @@
         </div>
     </div>
 
-    
+    <!-- JS Scripts -->
     <script src="javascript/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
     <script src="javascript/bootstrap.min.js"></script>
     <script src="javascript/country.js"></script> 
 </body>

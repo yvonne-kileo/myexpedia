@@ -37,5 +37,17 @@ class country extends db{
             return ["status"=>"error","message"=>"Failed to delete country"];
         }
     }
+    function getcountrywithairlinecount() {
+    $sql = "
+        SELECT 
+            c.id, 
+            c.countryname, 
+            c.cities, 
+            c.airports, 
+            (SELECT COUNT(*) FROM airlines a WHERE a.country_id = c.id) AS airline
+        FROM countries c
+    ";
+    return $this->getJSON($sql);
+}
 }
 ?>
