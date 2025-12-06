@@ -24,22 +24,24 @@ class db {
             throw new Exception("Connection failed: " . $e->getMessage());
         }
     }
-
     function getData($sql) {
-        try {
-            return $this->connect()->query($sql);
-        } catch (PDOException $e) {
-            throw new Exception("Database query failed: " . $e->getMessage());
-        }
+    try {
+        return $this->connect()->query($sql); // returns PDOStatement
+    } catch (PDOException $e) {
+        throw new Exception("Database query failed: " . $e->getMessage());
+    }
     }
 
-    function getJSON($sql) {
-        try {
-            $rst = $this->getData($sql);
-            return json_encode($rst->fetchAll(PDO::FETCH_ASSOC));
-        } catch (Exception $e) {
-            throw new Exception("Failed to retrieve data: " . $e->getMessage());
-        }
+
+
+   function getJSON($sql) {
+    $stmt = $this->getData($sql);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // <-- fetch results
+    return json_encode($rows); // <-- return JSON
     }
+
+
+
+
 }
 ?>

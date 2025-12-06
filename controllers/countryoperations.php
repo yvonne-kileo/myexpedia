@@ -1,32 +1,36 @@
 <?php
 require_once("../models/countries.php");
 
+$country = new country();
+
 try {
-    $country = new country();
-
-    if (isset($_POST['savecountry'])) {
-        $countryname = $_POST['countryname'];
-        $response = $country->insertcountry($countryname);
-        echo json_encode($response);
+    // Insert new country
+    if(isset($_POST['savecountry'])){
+        $countryname = $_POST['countryname'] ?? '';
+        echo json_encode($country->insertcountry($countryname));
+        exit;
     }
 
-    if (isset($_GET['getcountry'])) {
-        $response = $country->getcountry();
-        echo $response;
-
+    // Get all countries (for dropdown)
+    if(isset($_GET['getcountry'])){
+        echo $country->getcountry();
+        exit;
     }
 
-    if (isset($_GET['listcountry'])) {
-        $response = $country->listcountry();
-        echo $response;
+    // List countries (for table)
+    if(isset($_GET['listcountry'])){
+        echo $country->listcountry();
+        exit;
     }
 
-    if (isset($_POST['deletecountry'])) {
-        $countryid = $_POST['countryid'];
-        $response = $country->deletecountry($countryid);
-        echo json_encode($response);
+    // Delete country
+    if(isset($_POST['deletecountry'])){
+        $countryid = $_POST['countryid'] ?? 0;
+        echo json_encode($country->deletecountry($countryid));
+        exit;
     }
-} catch (Exception $e) {
-    echo json_encode(array("error" => $e->getMessage()));
+
+} catch(Exception $e){
+    echo json_encode(["status"=>"error","message"=>$e->getMessage()]);
 }
 ?>

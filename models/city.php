@@ -1,37 +1,47 @@
 <?php
 require_once("db.php");
 
-class city extends db{
+class City extends db {
 
-    function checkcity($p_cityname){
-        $sql="CALL `sp_checkcity`('{$p_cityname}')";
-        return $this->getData($sql)->rowCount();
+    // Check if city exists
+    public function checkcity($cityname) {
+        $sql = "CALL sp_checkcity('$cityname')";
+        $rst = $this->getData($sql);
+        return $rst->rowCount(); // returns number of rows
     }
 
-    function insertcity($cityname, $countryid){
-    if($this->checkcity($cityname) > 0){
-        return ["status"=>"exists","message"=>"city name already exists"];
-    }else{
-        $sql="CALL `sp_insertcity`('{$cityname}', {$countryid})";
-        $this->getData($sql);
-        return ["status"=>"success","message"=>"city inserted successfully"];
+    // Insert city
+    public function insertcity($cityname, $countryid) {
+        if ($this->checkcity($cityname) > 0) {
+            return ["status" => "exists", "message" => "City name already exists"];
+        } else {
+            $sql = "CALL sp_insertcity('$cityname', $countryid)";
+            $this->getData($sql);
+            return ["status" => "success", "message" => "City inserted successfully"];
+        }
     }
-    }
-    
 
-    function getcity() {
+    // Get cities as JSON
+    public function getcity() {
         $sql = "CALL sp_getcity()";
         return $this->getJSON($sql);
     }
 
-    function listcity() {
+    public function listcity() {
         $sql = "CALL sp_listcities()";
         return $this->getJSON($sql);
     }
 
-    function deletecity($id) {
+    public function deletecity($id) {
         $sql = "CALL sp_deletecity($id)";
         $this->getData($sql);
-        return array("status" => "success", "message" => "City deleted successfully");
+        return ["status" => "success", "message" => "City deleted successfully"];
+    }
+
+    public function updatecity($id, $cityname, $countryid) {
+        $sql = "CALL sp_updatecity($id, '$cityname', $countryid)";
+        $this->getData($sql);
+        return ["status" => "success", "message" => "City updated successfully"];
     }
 }
+?>
